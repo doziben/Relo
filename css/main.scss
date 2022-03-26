@@ -40,6 +40,7 @@
         font-weight: 300;
     }
 
+
     h3 {
         font-family: "Poppins", sans-serif;
         color: var(--secondary-color);
@@ -57,7 +58,11 @@
     }
 }
 
-
+.header-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: var(--secondary-color);
+}
 
 .container {
     margin-left: 5%;
@@ -66,6 +71,9 @@
 
 header {
     background-color: var(--secondary-color);
+    width: 100vw;
+    position: fixed;
+    z-index: 9;
 
     .header {
         display:  flex;
@@ -90,7 +98,48 @@ header {
     }
     
     nav {
-        display: none;
+        display:none;
+        position: fixed;
+        z-index: 999;
+        margin-top: 40%;
+        height: 30vh;
+        width: 100vw;
+        margin-left:-5%;
+        margin-right: 0;
+        background: var(--secondary-color);
+         
+        ul.secondary-nav {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            list-style-type: none;
+            padding: 5% 5%;
+
+            li {
+                padding-top: 5%;
+
+                a {
+                    font-family: "MonumentExtended", sans-serif;
+                    color: var(--white-color);
+                    font-size: 1.6rem;
+
+                    svg.icon {
+                        fill: none;
+                    }
+
+                    &:hover{
+                        color: var(--primary-color);
+                        path {
+                            fill: var(--primary-color);
+                        }
+                    }
+                    
+                }
+
+            }
+            
+           
+        }
     }
 }
 
