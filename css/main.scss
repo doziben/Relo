@@ -9,13 +9,35 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
 
+.dark-mode {
+    background-color: var(--secondary-color);
+    h2, h3, p {
+        color: var(--white-color);
+    }
+
+    section.categories {
+        background-color: var(--light-dark-color);
+
+        ul.categories-list{
+            
+        a {
+            background-color: var(--secondary-color);
+            color: var(--grey-white-color);
+        }
+
+        }
+
+    }
+}
 
 :root {
+    
     --primary-color: #FC9D46 ;
     --secondary-color: #24252a ;
     --light-dark-color: #3A3B3F;
     --white-color: #FFFFFF;
     --grey-white-color: #EDEDED;
+
 }
 
 * {
@@ -389,7 +411,7 @@ section.content {
         place-content: center;
         overflow: hidden;
         height: 7vh;
-        width: 100%;
+        width: 100vw;
 
         ul.categories-list {
             display: flex;

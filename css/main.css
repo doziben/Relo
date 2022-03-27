@@ -6,6 +6,23 @@
   font-style: normal;
 }
 
+.dark-mode {
+  background-color: var(--secondary-color);
+}
+
+.dark-mode h2, .dark-mode h3, .dark-mode p {
+  color: var(--white-color);
+}
+
+.dark-mode section.categories {
+  background-color: var(--light-dark-color);
+}
+
+.dark-mode section.categories ul.categories-list a {
+  background-color: var(--secondary-color);
+  color: var(--grey-white-color);
+}
+
 :root {
   --primary-color: #FC9D46 ;
   --secondary-color: #24252a ;
@@ -424,7 +441,7 @@ section.content .movie-row .movie-col .movie .movie-time h4 {
     place-content: center;
     overflow: hidden;
     height: 7vh;
-    width: 100%;
+    width: 100vw;
   }
   section.categories ul.categories-list {
     display: -webkit-box;
