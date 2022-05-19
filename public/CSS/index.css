@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap");
+@font-face {
+  font-family: 'MonumentExtended';
+  src: url("fonts/monumentextended-black-webfont.woff2") format("woff2"), url("monumentextended-black-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.root {
+  --primary-color: ;
+}
+
+h1 {
+  font-family: 'MonumentExtended', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+/*# sourceMappingURL=index.css.map */
