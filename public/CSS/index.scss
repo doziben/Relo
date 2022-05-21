@@ -9,17 +9,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
 
 // colors
-.root {
-    --primary-color: ;
+:root {
+    --primary-color:   hsla(29, 97%, 63%, 1) ;
+    --dark-main-color: hsla(224, 32%, 9%, 1) ;
+    --dark-beta-color: hsla(223, 36%, 14%, 1) ;
+    --text-main-color: hsla(0, 0%, 100%, 1) ;
+    --text-beta-color: hsla(225, 3%, 55%, 1) ;
 }
-
 // fonts 
 h1 {
     font-family: 'MonumentExtended', sans-serif;
+}
+
+a, p {
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
 }
 
 // body
 body {
     margin: 0;
     padding: 0;
+    background-color: var(--dark-main-color);
 }
+
+.container {
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+// colors
+h1, a {
+    color: var(--text-main-color);
+}
+
+.logo { width: 4rem;}
+
+// media queries
+// 312, 768, 1024, 1280 
+// MovieRow Divs from 1024 will span the availabe width while from 768 - 312 will overflow scroll
