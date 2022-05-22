@@ -19,6 +19,7 @@
 // fonts 
 h1 {
     font-family: 'MonumentExtended', sans-serif;
+    margin-top: 0;
 }
 
 a, p {
@@ -42,6 +43,7 @@ body {
 h1, a {
     color: var(--text-main-color);
 }
+
 
 .logo { width: 4rem;}
 

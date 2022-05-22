@@ -17,12 +17,12 @@ template.innerHTML = /*HTML*/ `
 
         nav {
             display: flex;
-            gap: 1rem;
+            gap: 1.2rem;
             align-items: center;
         }
     </style>
     <header>
-        <div class = " header container">
+        <div class = " header ">
         
             <img class ="logo" src ="../../public/assets/logo.svg" alt="Relo Logo">
             <nav>
