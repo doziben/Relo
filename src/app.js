@@ -1,7 +1,7 @@
 // Import all views
 import { home } from "./views/home.js";
 import { categories } from "./views/categories.js";
-import { bookmarks } from "./views/bookmarks.js";
+import { watchlist } from "./views/watchlist.js";
 import { explore } from "./views/explore.js";
 
 
@@ -31,8 +31,8 @@ template.innerHTML = /*HTML*/ `
 `
 
 class app extends HTMLElement {
-    render(view){
-        view = this.getAttribute('view')
+    render(){
+        let view = this.getAttribute('view')
         const page = `<r-${view}></r-${view}>`
         this.shadowRoot.querySelector('.page').innerHTML = page
     }
@@ -48,13 +48,9 @@ class app extends HTMLElement {
         return ['view']
     }
 
-    attributeChangedCallback(attr, oldVal, value){
-        switch (attr) {
-            case "view":
-              if (!value || value == oldVal) return;
-              this.render(value)
-            break;
-          }
+    attributeChangedCallback(){
+        this.render()
+        console.log(this.getAttribute('view'))
     }
 }
 

@@ -10,10 +10,10 @@ template.innerHTML = /*HTML*/ `
     @import url(../../public/CSS/index.css);
     </style>
     
-    <h1> bookmarks <h1>
+    <h1> Watchlist <h1>
 `
 
-class bookmarks extends HTMLElement {
+class watchlist extends HTMLElement {
     constructor(){
         super();
         this.attachShadow({mode: 'open'})
@@ -21,5 +21,5 @@ class bookmarks extends HTMLElement {
     }
 }
 
-window.customElements.define('r-bookmarks', bookmarks)
-export {bookmarks}
+window.customElements.define('r-watchlist', watchlist)
+export {watchlist}

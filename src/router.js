@@ -12,5 +12,7 @@ const router = (ref)=> {
     app.setAttribute('view', ref)
 }
 
+//Push routes to window
+
 
 export {router}

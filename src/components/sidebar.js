@@ -28,11 +28,15 @@ template.innerHTML = /*HTML*/ `
             fill: var(--primary-color);
         }
 
+        a:hover {
+            background-color: var(--dark-main-color);
+        }
+
         @media only screen and (min-width: 1024px){
             .sidebar{
                 flex-direction: column;
                 width: auto;
-                top: 12%;
+                top: 15%;
                 margin-right: 0;
                 margin-left: 0;
             }
@@ -40,7 +44,7 @@ template.innerHTML = /*HTML*/ `
     </style>
 
     <div class="sidebar container">
-    <a href="home"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <a href="home" ><svg class="active" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M27.7734 10.68L19.04 3.69335C17.3334 2.33335 14.6667 2.32001 12.9734 3.68001L4.24003 10.68C2.9867 11.68 2.2267 13.68 2.49337 15.2533L4.17337 25.3067C4.56003 27.56 6.65336 29.3333 8.93337 29.3333H23.0667C25.32 29.3333 27.4534 27.52 27.84 25.2933L29.52 15.24C29.76 13.68 29 11.68 27.7734 10.68ZM17 24C17 24.5467 16.5467 25 16 25C15.4534 25 15 24.5467 15 24V20C15 19.4533 15.4534 19 16 19C16.5467 19 17 19.4533 17 20V24Z" fill=""/>
     </svg></a>
     
@@ -57,7 +61,7 @@ template.innerHTML = /*HTML*/ `
     <path d="M10.48 17V29.3333H21.5866C21.6666 29.3333 21.7466 29.3333 21.8133 29.32V17H10.48V17Z" fill=""/>
     </svg></a>
 
-    <a href="bookmarks"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <a href="watchlist"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M19.6401 7.81335V3.33335C19.6401 2.96002 19.3468 2.66669 18.9734 2.66669H13.0268C12.6534 2.66669 12.3601 2.96002 12.3601 3.33335V7.81335C12.3601 8.18669 12.6534 8.48002 13.0268 8.48002H18.9734C19.3468 8.48002 19.6401 8.18669 19.6401 7.81335Z" fill=""/>
     <path d="M9.66656 2.69333C6.25322 2.90666 3.91989 4.66666 3.05322 7.59999C2.91989 8.03999 3.23989 8.48 3.69322 8.48H9.69322C10.0666 8.48 10.3599 8.18666 10.3599 7.81333V3.35999C10.3599 2.98666 10.0399 2.66666 9.66656 2.69333Z" fill=""/>
     <path d="M22.3332 2.68002C25.7466 2.89336 28.0799 4.65336 28.9466 7.58669C29.0799 8.02669 28.7599 8.46669 28.3066 8.46669H22.3066C21.9332 8.46669 21.6399 8.17336 21.6399 7.80002V3.34669C21.6399 2.97336 21.9599 2.65336 22.3332 2.68002Z" fill=""/>
@@ -86,8 +90,7 @@ class sidebar extends HTMLElement {
             tab.addEventListener('click', (e)=>{
                 e.preventDefault();
                 let paths = e.composedPath()[0]
-                let ref= paths.href.replace('public/', "")
-
+                let ref= paths.pathname.replace('/public/', "")
                 router(ref);
                 tabs.forEach((item)=>{
                     item.lastChild.classList.remove('active');
