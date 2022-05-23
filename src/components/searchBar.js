@@ -6,6 +6,20 @@ template.innerHTML = /*HTML*/ `
                 display:none;
             }
 
+        input{
+            width: 20rem;
+            background-color: var(--dark-main-color);
+            border-style: none;
+            padding: 0.5rem 1.2rem;
+            outline: none;
+            color:white;
+            font-family: "Poppins", san-serif;
+        }
+
+        input:focus{
+            border-bottom: 2px solid var(--primary-color);
+        }
+
         @media only screen and (min-width: 1024px){
             #search{
                 display:block;
@@ -19,7 +33,7 @@ template.innerHTML = /*HTML*/ `
 
     <div class = "searchbar">
         <img src ="../../public/assets/search.svg" alt="Relo Logo">
-        <input type = "search" name="search"  placeholder = "Search for movies, tv shows, cartoons" id="search">
+        <input type = "text" name="search"  placeholder = "Search for movies, tv shows, cartoons" id="search">
     </div>
 `
 

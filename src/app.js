@@ -7,7 +7,7 @@ import { explore } from "./views/explore.js";
 
 // Controller
 // Get Data from Model.js
-// Render Data in respective view
+// Render Data in respective views
 
 const template = document.createElement('template');
 template.innerHTML = /*HTML*/ `
