@@ -13,6 +13,9 @@ template.innerHTML = /*HTML*/ `
     <h1> Home <h1>
 `
 
+// Movie Div selected then renderView function is called to create movie elements in the divs
+// addtoWatchlist
+
 class home extends HTMLElement {
     constructor(){
         super();

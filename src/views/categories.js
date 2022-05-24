@@ -1,6 +1,7 @@
 //Import components required
 import { header } from "../components/header.js";
 import { sidebar } from "../components/sideBar.js";
+import { category } from "../components/category.js";
 
 //Import model to handle data 
 
@@ -10,7 +11,10 @@ template.innerHTML = /*HTML*/ `
     @import url(../../public/CSS/index.css);
     </style>
     
-    <h1> categories <h1>
+    <h1> Categories <h1>
+    <div class = "categories">
+        <r-category name="TV Shows"></r-category>
+    </div>
 `
 
 class categories extends HTMLElement {

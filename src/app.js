@@ -5,8 +5,20 @@ import { watchlist } from "./views/watchlist.js";
 import { explore } from "./views/explore.js";
 
 
-// Controller
-// Get Data from Model.js
+// Get Data from Model
+import { getTrending } from "./model.js";
+
+// CONTROLLER
+// getTrending ==> GET VALUES ==> RenderData
+
+export const CTRLtrending = (data)=> {
+    console.log(data)
+    //for each data renderTrending(img src, movie name)
+}
+
+
+// AddtoWatchlist ==> RenderWatchlist
+
 // Render Data in respective views
 
 const template = document.createElement('template');

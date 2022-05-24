@@ -24,7 +24,7 @@ template.innerHTML = /*HTML*/ `
     }
     </style>
 
-    <div class="category container"><a class="category-text" href="" ></a></div>
+    <div class="category"><a class="category-text" href="" ></a></div>
 `
 
 class category extends HTMLElement {
