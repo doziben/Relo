@@ -7,19 +7,28 @@ import { explore } from "./views/explore.js";
 
 // Get Data from Model
 import { getTrending } from "./model.js";
+import { getCategories } from "./model.js";
 
 // CONTROLLER
-// getTrending ==> GET VALUES ==> RenderData
 
+// getTrending ==> GET VALUES ==> RenderData
 export const CTRLtrending = (data)=> {
     console.log(data)
     //for each data renderTrending(img src, movie name)
+    const imgPrefix = "https://image.tmdb.org/t/p/w500/";
 }
+
+// getCategories ==> DEFINE DATA ==> RenderData
+export const CTRLcategories = (data)=> {
+    console.log(data)
+    //for each data => Render Categories
+}
+
+
 
 
 // AddtoWatchlist ==> RenderWatchlist
 
-// Render Data in respective views
 
 const template = document.createElement('template');
 template.innerHTML = /*HTML*/ `

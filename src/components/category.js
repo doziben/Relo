@@ -6,8 +6,9 @@ template.innerHTML = /*HTML*/ `
     a.category-text{
         font-family: 'MonumentExtended', sans-serif;
         font-size: 2.4rem;
+        top: 60%;
         text-decoration: none;
-        margin-top: 42%;
+        position: absolute;
         margin-left: 5%;
         margin-right: 5%;
     }
@@ -18,10 +19,14 @@ template.innerHTML = /*HTML*/ `
 
     .category {
         display: grid;
+        position: relative;
         width: auto;
         height: 32vh;
+        min-height: 18rem;
         border-radius: 12px;
     }
+
+    /*set max width and display grids for cards*/
     </style>
 
     <div class="category"><a class="category-text" href="" ></a></div>

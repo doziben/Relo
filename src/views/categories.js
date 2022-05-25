@@ -4,7 +4,6 @@ import { sidebar } from "../components/sideBar.js";
 import { category } from "../components/category.js";
 
 //Import model to handle data 
-
 const template = document.createElement('template');
 template.innerHTML = /*HTML*/ `
     <style>
@@ -13,7 +12,6 @@ template.innerHTML = /*HTML*/ `
     
     <h1> Categories <h1>
     <div class = "categories">
-        <r-category name="TV Shows"></r-category>
     </div>
 `
 
@@ -22,6 +20,10 @@ class categories extends HTMLElement {
         super();
         this.attachShadow({mode: 'open'})
         this.shadowRoot.appendChild(template.content.cloneNode(true))
+    }
+
+    render(){
+        //Create Categories for data
     }
 }
 

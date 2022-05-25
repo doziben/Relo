@@ -1,5 +1,6 @@
 //Return Data to Controller
 import { CTRLtrending } from "./app.js";
+import { CTRLcategories } from "./app.js";
 
 //Get API Data
 const API_KEY = "7d273b2dee1efe87143e46a06d9a3a39"
@@ -13,5 +14,14 @@ export const getTrending = async() => {
 }
 
 getTrending()
+
+export const getCategories = async()=> {
+    const categoriesAPI = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+    const response = await fetch(categoriesAPI);
+    const data = await response.json()
+    CTRLcategories(data)
+}
+
+getCategories()
 
 //CRUD for Users
