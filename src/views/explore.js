@@ -1,8 +1,9 @@
 //Import components required
 import { header } from "../components/header.js";
 import { sidebar } from "../components/sideBar.js";
+import { arrow } from "../components/arrow.js";
 
-//Import model to handle data 
+//Import controller
 
 const template = document.createElement('template');
 template.innerHTML = /*HTML*/ `
