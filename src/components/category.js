@@ -33,20 +33,19 @@ template.innerHTML = /*HTML*/ `
 `
 
 class category extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'})
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
-
+    render(){
         const $ = (element)=> {
             return this.shadowRoot.querySelector(element)
         }
         
-        const $all = (element)=> {
-            return this.shadowRoot.querySelectorAll(element)
-        }
 
         $('a').innerHTML = this.getAttribute('name')
+    }
+    constructor(){
+        super();
+        this.attachShadow({mode: 'open'})
+        this.shadowRoot.appendChild(template.content.cloneNode(true))
+        this.render()
     }
 
     connectedCallback(){
@@ -69,10 +68,15 @@ class category extends HTMLElement {
         ]
 
         let random = Math.floor(Math.random()*10);
-        console.log(random)
         $('.category').style = `background: linear-gradient(${gradients[random]});`
-        
-        
+    }
+
+    static get observedAttributes(){
+        return ['name']
+    }
+
+    attributeChangedCallback(){
+        this.render()
     }
 }
 

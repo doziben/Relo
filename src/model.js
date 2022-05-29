@@ -15,13 +15,13 @@ export const getTrending = async() => {
 
 getTrending()
 
-export const getCategories = async()=> {
+export const getCategories = async function (){
     const categoriesAPI = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
-    const response = await fetch(categoriesAPI);
+    const response = await fetch(categoriesAPI)
     const data = await response.json()
-    CTRLcategories(data)
+    return data
 }
 
-getCategories()
+
 
 //CRUD for Users

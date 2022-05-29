@@ -11,7 +11,7 @@ template.innerHTML = /*HTML*/ `
     @import url(../../public/CSS/index.css);
     </style>
     
-    <h1> explore <h1>
+    <h1> Explore </h1>
 `
 
 class explore extends HTMLElement {

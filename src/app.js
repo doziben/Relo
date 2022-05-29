@@ -6,8 +6,7 @@ import { explore } from "./views/explore.js";
 
 
 // Get Data from Model
-import { getTrending } from "./model.js";
-import { getCategories } from "./model.js";
+import { getCategories, getTrending } from "./model.js";
 
 // CONTROLLER
 
@@ -19,12 +18,12 @@ export const CTRLtrending = (data)=> {
 }
 
 // getCategories ==> DEFINE DATA ==> RenderData
-export const CTRLcategories = (data)=> {
-    console.log(data)
-    //for each data => Render Categories
+export const CTRLcategories = async ()=> {
+    const data =  await getCategories()
+    const arr = data.genres
+    return arr;
+    
 }
-
-
 
 
 // AddtoWatchlist ==> RenderWatchlist
