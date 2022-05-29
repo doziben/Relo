@@ -4,14 +4,23 @@ template.innerHTML = /*HTML*/ `
         .right{
             position: absolute;
             transform: rotate(180deg);
-            margin-left: 4px;
+            right: -24px;
         }
         .left{
             position: absolute;
-            margin-right: 4px;
+            left: -24px;
         }
-        .arrow{
 
+        .arrow{
+            cursor: pointer;
+        }
+
+        .hidden{
+            visibility: hidden;
+        }
+
+        rect:hover{
+            fill-opacity: 0.50;
         }
     </style>
 
@@ -43,6 +52,7 @@ class arrow extends HTMLElement {
         else if(direction=="left"){
             this.shadowRoot.querySelector('svg').classList.add('left')
         }
+        
     }
     constructor(){
         super();

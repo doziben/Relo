@@ -7,6 +7,11 @@ template.innerHTML = /*HTML*/ `
             padding: 0.5rem 1.2rem;
             text-decoration: none;
             border-radius: 24px;
+            transition: all ease-in-out 0.1s;
+        }
+
+        a:hover{
+            background-color: var(--primary-hover-color);
         }
     </style>
 

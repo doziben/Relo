@@ -14,6 +14,8 @@ template.innerHTML = /*HTML*/ `
             outline: none;
             color:white;
             font-family: "Poppins", san-serif;
+            border-bottom: 2px solid var(--dark-main-color);
+            transition: all ease-in-out 0.1s;
         }
 
         input:focus{

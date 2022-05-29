@@ -6,7 +6,7 @@ template.innerHTML = /*HTML*/ `
     a.category-text{
         font-family: 'MonumentExtended', sans-serif;
         font-size: 2.4rem;
-        top: 60%;
+        bottom: 10%;
         text-decoration: none;
         position: absolute;
         margin-left: 5%;
@@ -65,9 +65,11 @@ class category extends HTMLElement {
             "90deg, hsla(350, 73%, 44%, 1) 0%, hsla(274, 65%, 12%, 1) 100%",
             "90deg, hsla(318, 44%, 51%, 1) 0%, hsla(347, 94%, 48%, 1) 100%",
             "62deg, rgba(13,131,50,1) 0%, rgba(43,177,56,1) 35%, rgba(16,107,209,1) 100%",
+            "90deg, hsla(22, 100%, 78%, 1) 0%, hsla(2, 78%, 62%, 1) 100%"
         ]
 
         let random = Math.floor(Math.random()*10);
+        console.log(random)
         $('.category').style = `background: linear-gradient(${gradients[random]});`
         
         

@@ -8,12 +8,19 @@ template.innerHTML = /*HTML*/ `
     }
 
     .save {
+        height: 40px;
+        cursor: pointer;
         right: 5%;
         border-radius: 100px;
         position: absolute;
         z-index: 5;
         background: rgba(0, 0, 0, 0.3);
         backdrop-filter: blur(24px);
+        transition: all ease-in-out 0.1s;
+    }
+
+    .save:hover{
+        background: rgba(255, 255, 255, 0.4);
     }
     </style>
 
