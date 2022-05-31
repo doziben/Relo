@@ -8,7 +8,6 @@ import { banner } from "../components/banner.js";
 import { footer } from "../components/footer.js";
 
 //Import controller
-
 const template = document.createElement('template');
 template.innerHTML = /*HTML*/ `
     <style>
@@ -58,10 +57,11 @@ template.innerHTML = /*HTML*/ `
     
 
     </style>
-
+    <div class = "main">
+    </div>
     <section >
         <h1> Trending </h1>
-        <div class = "trending">
+        <div class = "trending" >
             <r-moviepor></r-moviepor>
             <r-moviepor></r-moviepor>
             <r-moviepor></r-moviepor>
@@ -124,12 +124,40 @@ template.innerHTML = /*HTML*/ `
 // Movie Div selected then renderView function is called to create movie elements in the divs
 // addtoWatchlist
 
+// at 0%, :host is at bottom and 0 opacity, at 100%, position is normal and opacity is 100
+// OR at 0%, loader is opaque 100%, then when leaving page, opacity is 0%
 class home extends HTMLElement {
+    loader(){
+        const elem = this.shadowRoot.querySelector('.main')
+        this.shadowRoot.removeChild(elem)
+        // const page = this.shadowRoot.querySelector('r-loader')
+        // page.remove()
+    }
+
+    render(){
+        const main = this.shadowRoot.querySelector('.main')
+        main.innerHTML = '<r-loader></r-loader>'
+
+            
+        window.addEventListener('load',()=>{
+            setTimeout(()=>{this.loader()}, 3000)
+            })
+
+        if(document.readyState === 'complete'){
+            setTimeout(()=>{this.loader()}, 1000)
+        }
+    }
     constructor(){
         super();
         this.attachShadow({mode: 'open'})
         this.shadowRoot.appendChild(template.content.cloneNode(true))
+        const loader = document.createElement('r-loader')
     }
+
+    connectedCallback(){
+        this.render();
+    }
+
 }
 
 window.customElements.define('r-home', home)

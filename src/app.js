@@ -3,7 +3,7 @@ import { home } from "./views/home.js";
 import { categories } from "./views/categories.js";
 import { watchlist } from "./views/watchlist.js";
 import { explore } from "./views/explore.js";
-
+import { loader } from "./components/loader.js";
 
 // Get Data from Model
 import { getCategories, getTrending } from "./model.js";
@@ -22,7 +22,6 @@ export const CTRLcategories = async ()=> {
     const data =  await getCategories()
     const arr = data.genres
     return arr;
-    
 }
 
 
@@ -49,7 +48,6 @@ template.innerHTML = /*HTML*/ `
         <div class = "page"></div>
     </div>
 `
-
 class app extends HTMLElement {
     render(){
         let view = this.getAttribute('view')

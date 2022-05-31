@@ -24,6 +24,8 @@ template.innerHTML = /*HTML*/ `
     
     <h1> Watchlist </h1>
 
+    <div class = "main">
+    </div>
     <div class ="watchlist">
     </div>
 `
@@ -47,7 +49,25 @@ class watchlist extends HTMLElement {
             </div>
         `
     }
+
+    loader(){
+        const elem = this.shadowRoot.querySelector('.main')
+        this.shadowRoot.removeChild(elem)
+    }
+
     render(){
+        const main = this.shadowRoot.querySelector('.main')
+        main.innerHTML = '<r-loader></r-loader>'
+
+            
+        window.addEventListener('load',()=>{
+            setTimeout(()=>{this.loader()}, 3000)
+            })
+
+        if(document.readyState === 'complete'){
+            setTimeout(()=>{this.loader()}, 1000)
+        }
+
         const div = this.shadowRoot.querySelector('.watchlist');
         // Render watchlist
         if(div.innerText == ""){

@@ -15,7 +15,7 @@ template.innerHTML = /*HTML*/ `
             width: 88%;
             top: 90%;
             margin: 0;
-            z-index: 7;
+            z-index: 9;
         }
 
         svg {

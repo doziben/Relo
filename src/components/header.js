@@ -8,14 +8,17 @@ template.innerHTML = /*HTML*/ `
         @import url(../../public/CSS/index.css);
         .header{
             display: flex;
-            width: auto;
+            width: 100%;
             justify-content: space-between;
             align-items: center;
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
-
+        img {
+            z-index: 10;
+        }
         nav {
+            z-index: 10;
             display: flex;
             gap: 1.2rem;
             align-items: center;

@@ -19,15 +19,35 @@ template.innerHTML = /*HTML*/ `
     }
     </style>
     
+    <div class = "main">
+    </div>
     <div class = "categories">
         
     </div>
     <r-footer></r-footer>
+
 `
 
 class categories extends HTMLElement {
+    loader(){
+        const elem = this.shadowRoot.querySelector('.main')
+        this.shadowRoot.removeChild(elem)
+    }
 
     async render (){
+
+        const main = this.shadowRoot.querySelector('.main')
+        main.innerHTML = '<r-loader></r-loader>'
+
+            
+        window.addEventListener('load',()=>{
+            setTimeout(()=>{this.loader()}, 3000)
+            })
+
+        if(document.readyState === 'complete'){
+            setTimeout(()=>{this.loader()}, 1000)
+        }
+
         const arr = await CTRLcategories()
         arr.forEach((element)=>{
             const name = element.name;
