@@ -7,15 +7,19 @@ import { loader } from "./components/loader.js";
 
 // Get Data from Model
 import { getCategories, getTrending } from "./model.js";
-
+import { getTVshows } from "./model.js";
 // CONTROLLER
 
 // getTrending ==> GET VALUES ==> RenderData
-export const CTRLtrending = (data)=> {
-    console.log(data)
+export const CTRLtrending = async ()=> {
+    const trending = await getTrending()
+    const tv = await getTVshows()
+    const data = [trending.results, tv]
+    return data
     //for each data renderTrending(img src, movie name)
     const imgPrefix = "https://image.tmdb.org/t/p/w500/";
 }
+
 
 // getCategories ==> DEFINE DATA ==> RenderData
 export const CTRLcategories = async ()=> {
@@ -23,6 +27,15 @@ export const CTRLcategories = async ()=> {
     const arr = data.genres
     return arr;
 }
+
+
+export const display = (elem, title, img, parent)=>{
+    const type = document.createElement(elem)
+    type.setAttribute('img', img)
+    type.setAttribute('title', title)
+    parent.appendChild(type)
+}
+
 
 
 // AddtoWatchlist ==> RenderWatchlist
@@ -50,9 +63,11 @@ template.innerHTML = /*HTML*/ `
 `
 class app extends HTMLElement {
     render(){
-        let view = this.getAttribute('view')
+        let view = this.getAttribute('view') || 'home'
         const page = `<r-${view}></r-${view}>`
-        this.shadowRoot.querySelector('.page').innerHTML = page
+        const pageDiv = this.shadowRoot.querySelector('.page')
+        pageDiv.innerHTML = page
+        // pageDiv.innerHTML = '<r-home></r-home>'
     }
 
     constructor(){

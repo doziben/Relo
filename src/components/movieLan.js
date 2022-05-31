@@ -31,21 +31,37 @@ template.innerHTML = /*HTML*/ `
         z-index: 5;
         padding-left: 1rem;
         padding-right: 1rem;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
     </style>
 
     <div class ="movieLan">
         <r-save></r-save>
-        <p>Morbius</p>
-        <img src="https://image.tmdb.org/t/p/w500/6JjfSchsU6daXk2AKX8EEBjO3Fm.jpg" alt="">
+        <p></p>
+        <img src="" alt="">
     </div>
 `
 
 class movielan extends HTMLElement {
+    render(){
+        const titleSlot = this.shadowRoot.querySelector('p')
+        const imgSlot = this.shadowRoot.querySelector('img')
+        const title = this.getAttribute('title')
+        const img = this.getAttribute('img')
+
+        titleSlot.innerText = title
+        imgSlot.src = img
+    }
     constructor(){
         super();
         this.attachShadow({mode: 'open'})
         this.shadowRoot.appendChild(template.content.cloneNode(true))
+    }
+    connectedCallback(){
+        this.render()
     }
 }
 

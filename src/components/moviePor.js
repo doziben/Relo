@@ -35,6 +35,10 @@ template.innerHTML = /*HTML*/ `
         z-index: 5;
         padding-left: 1rem;
         padding-right: 1rem;
+        max-width: 18ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     @media only screen and (min-width:1024px){
@@ -46,21 +50,30 @@ template.innerHTML = /*HTML*/ `
     
     <div class = "moviePor">
         <r-save></r-save>
-        <p>Morbius</p>
-        <img src="https://image.tmdb.org/t/p/w500//gG9fTyDL03fiKnOpf2tr01sncnt.jpg" alt="">
+        <p></p>
+        <img src="" alt="">
     </div>
 `
 
 //will take in img src and movie name
 
 class moviepor extends HTMLElement {
-    render(){
-        //insert functions here
-    }
+        render(){
+            const titleSlot = this.shadowRoot.querySelector('p')
+            const imgSlot = this.shadowRoot.querySelector('img')
+            const title = this.getAttribute('title')
+            const img = this.getAttribute('img')
+    
+            titleSlot.innerText = title
+            imgSlot.src = img
+        }
     constructor(){
         super();
         this.attachShadow({mode: 'open'})
         this.shadowRoot.appendChild(template.content.cloneNode(true))
+    }
+    connectedCallback(){
+        this.render()
     }
 }
 

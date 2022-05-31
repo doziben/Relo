@@ -8,12 +8,15 @@ import { banner } from "../components/banner.js";
 import { footer } from "../components/footer.js";
 
 //Import controller
+import { CTRLtrending } from "../app.js";
+import { display } from "../app.js";
+
 const template = document.createElement('template');
 template.innerHTML = /*HTML*/ `
     <style>
     @import url(../../public/CSS/index.css);
     
-    .trending, .foryou{
+    .trending, .foryou, .discover, .tvshows{
         position: relative;
         display:flex;
         gap: 0.5rem;
@@ -62,9 +65,6 @@ template.innerHTML = /*HTML*/ `
     <section >
         <h1> Trending </h1>
         <div class = "trending" >
-            <r-moviepor></r-moviepor>
-            <r-moviepor></r-moviepor>
-            <r-moviepor></r-moviepor>
         </div>
     </section>
 
@@ -75,16 +75,6 @@ template.innerHTML = /*HTML*/ `
                 <r-arrow class="arrow" direction="right"></r-arrow>
             </div>
         <div class = "foryou">
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
-            <r-movielan></r-movielan>
         </div>
     </section>
 
@@ -94,26 +84,13 @@ template.innerHTML = /*HTML*/ `
             <r-arrow class="arrow" direction="left"></r-arrow>
             <r-arrow class="arrow" direction="right"></r-arrow>
         </div>
-    <div class = "foryou">
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
-        <r-movielan></r-movielan>
+    <div class = "tvshows">
     </div>
     </section>
 
     <section class="d">
-    <h1> Free Movies </h1>
-    <div class = "trending">
-        <r-moviepor></r-moviepor>
-        <r-moviepor></r-moviepor>
-        <r-moviepor></r-moviepor>
+    <h1> Discover </h1>
+    <div class = "discover">
     </div>
     </section>
 
@@ -124,21 +101,67 @@ template.innerHTML = /*HTML*/ `
 // Movie Div selected then renderView function is called to create movie elements in the divs
 // addtoWatchlist
 
-// at 0%, :host is at bottom and 0 opacity, at 100%, position is normal and opacity is 100
-// OR at 0%, loader is opaque 100%, then when leaving page, opacity is 0%
+const imgPrefix = "https://image.tmdb.org/t/p/w500/";
 class home extends HTMLElement {
     loader(){
         const elem = this.shadowRoot.querySelector('.main')
         this.shadowRoot.removeChild(elem)
-        // const page = this.shadowRoot.querySelector('r-loader')
-        // page.remove()
     }
+    async displayMovies(){
+        const arr = await CTRLtrending();
+        const movie = arr[0]
+        const tv = arr[1]
 
+        const trending = movie.slice(0,3)
+        const forYou = movie.slice(3, 13)
+        
+        const tvshows = tv.results.slice(0,10)
+        const discover = movie.slice(13, 16)
+        console.log(tvshows)
+        console.log(discover)
+
+        const $ = (elem)=>{
+            return this.shadowRoot.querySelector(elem)
+        }
+
+        trending.forEach((e)=>{
+            const parent = $('.trending')
+            const title = e.title
+            const img = `${imgPrefix}${e.backdrop_path}`
+            return display('r-moviepor', title, img, parent)
+        })
+
+        forYou.forEach((e)=>{
+            const parent = $('.foryou')
+            const title = e.title
+            const img = `${imgPrefix}${e.poster_path}`
+            return display('r-movielan', title, img, parent)
+        })
+
+        tvshows.forEach((e)=>{
+            const parent = $('.tvshows')
+            const title = e.original_name
+            const img = `${imgPrefix}${e.poster_path}`
+            return display('r-movielan', title, img, parent)
+        })
+        
+        discover.forEach((e)=>{
+            const parent = $('.discover')
+            const title = e.title
+            const img = `${imgPrefix}${e.backdrop_path}`
+            return display('r-moviepor', title, img, parent)
+        })
+
+
+
+        //if section is empty, render elements
+        // foreach create elem/ display()
+    }
     render(){
+        console.log('hi')
         const main = this.shadowRoot.querySelector('.main')
         main.innerHTML = '<r-loader></r-loader>'
 
-            
         window.addEventListener('load',()=>{
             setTimeout(()=>{this.loader()}, 3000)
             })
@@ -146,12 +169,13 @@ class home extends HTMLElement {
         if(document.readyState === 'complete'){
             setTimeout(()=>{this.loader()}, 1000)
         }
+
+        this.displayMovies();
     }
     constructor(){
         super();
         this.attachShadow({mode: 'open'})
         this.shadowRoot.appendChild(template.content.cloneNode(true))
-        const loader = document.createElement('r-loader')
     }
 
     connectedCallback(){

@@ -3,6 +3,7 @@ import { header } from "../components/header.js";
 import { sidebar } from "../components/sideBar.js";
 
 //Import CTRL to handle data 
+import { display } from "../app.js";
 
 const template = document.createElement('template');
 template.innerHTML = /*HTML*/ `
@@ -25,10 +26,12 @@ template.innerHTML = /*HTML*/ `
     <h1> Watchlist </h1>
 
     <div class = "main">
+        <r-loader></r-loader>
     </div>
     <div class ="watchlist">
     </div>
 `
+
 
 class watchlist extends HTMLElement {
     emptyState(){
@@ -56,8 +59,8 @@ class watchlist extends HTMLElement {
     }
 
     render(){
+        //onrender, get data from localstorage
         const main = this.shadowRoot.querySelector('.main')
-        main.innerHTML = '<r-loader></r-loader>'
 
             
         window.addEventListener('load',()=>{
@@ -65,7 +68,7 @@ class watchlist extends HTMLElement {
             })
 
         if(document.readyState === 'complete'){
-            setTimeout(()=>{this.loader()}, 1000)
+            setTimeout(()=>{this.loader()}, 2000)
         }
 
         const div = this.shadowRoot.querySelector('.watchlist');

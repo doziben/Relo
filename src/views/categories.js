@@ -24,7 +24,6 @@ template.innerHTML = /*HTML*/ `
     <div class = "categories">
         
     </div>
-    <r-footer></r-footer>
 
 `
 

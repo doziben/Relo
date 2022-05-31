@@ -15,7 +15,9 @@ template.innerHTML = /*HTML*/ `
     height: 100%;
     background-color: var(--dark-main-color);
     position: fixed;
-    transition: all ease-in-out 0.1s;
+    animation-name: fade;
+    animation-duration: 3s;
+    animation-delay: 1s;
     }
 
     ::-webkit-scrollbar {
@@ -37,6 +39,16 @@ template.innerHTML = /*HTML*/ `
     @keyframes loading {
         100% {
             transform: rotate(360deg);
+        }
+    }
+
+    @keyframes fade {
+        0%{
+            opacity: 100%;
+        }
+
+        100%{
+            opacity: 2%;
         }
     }
     </style>
