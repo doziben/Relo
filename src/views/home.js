@@ -11,7 +11,7 @@ import { footer } from "../components/footer.js";
 import { CTRLtrending } from "../app.js";
 import { display } from "../app.js";
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = /*HTML*/ `
     <style>
     @import url(../../public/CSS/index.css);
@@ -96,93 +96,92 @@ template.innerHTML = /*HTML*/ `
 
     <r-banner></r-banner>
     <r-footer></r-footer>
-`
+`;
 
 // Movie Div selected then renderView function is called to create movie elements in the divs
 // addtoWatchlist
 
 const imgPrefix = "https://image.tmdb.org/t/p/w500/";
 class home extends HTMLElement {
-    loader(){
-        const elem = this.shadowRoot.querySelector('.main')
-        this.shadowRoot.removeChild(elem)
-    }
-    async displayMovies(){
-        const arr = await CTRLtrending();
-        const movie = arr[0]
-        const tv = arr[1]
+  loader() {
+    const elem = this.shadowRoot.querySelector(".main");
+    this.shadowRoot.removeChild(elem);
+  }
+  async displayMovies() {
+    const arr = await CTRLtrending();
+    const movie = arr[0];
+    const tv = arr[1];
 
-        const trending = movie.slice(0,3)
-        const forYou = movie.slice(3, 13)
-        
-        const tvshows = tv.results.slice(0,10)
-        const discover = movie.slice(13, 16)
-        console.log(tvshows)
-        console.log(discover)
+    const trending = movie.slice(0, 3);
+    const forYou = movie.slice(3, 13);
 
-        const $ = (elem)=>{
-            return this.shadowRoot.querySelector(elem)
-        }
+    const tvshows = tv.results.slice(0, 10);
+    const discover = movie.slice(13, 16);
 
-        trending.forEach((e)=>{
-            const parent = $('.trending')
-            const title = e.title
-            const img = `${imgPrefix}${e.backdrop_path}`
-            return display('r-moviepor', title, img, parent)
-        })
+    const $ = (elem) => {
+      return this.shadowRoot.querySelector(elem);
+    };
 
-        forYou.forEach((e)=>{
-            const parent = $('.foryou')
-            const title = e.title
-            const img = `${imgPrefix}${e.poster_path}`
-            return display('r-movielan', title, img, parent)
-        })
+    trending.forEach((e) => {
+      const parent = $(".trending");
+      const title = e.title;
+      const img = `${imgPrefix}${e.backdrop_path}`;
+      return display("r-moviepor", title, img, parent);
+    });
 
-        tvshows.forEach((e)=>{
-            const parent = $('.tvshows')
-            const title = e.original_name
-            const img = `${imgPrefix}${e.poster_path}`
-            return display('r-movielan', title, img, parent)
-        })
-        
-        discover.forEach((e)=>{
-            const parent = $('.discover')
-            const title = e.title
-            const img = `${imgPrefix}${e.backdrop_path}`
-            return display('r-moviepor', title, img, parent)
-        })
+    forYou.forEach((e) => {
+      const parent = $(".foryou");
+      const title = e.title;
+      const img = `${imgPrefix}${e.poster_path}`;
+      return display("r-movielan", title, img, parent);
+    });
 
+    tvshows.forEach((e) => {
+      const parent = $(".tvshows");
+      const title = e.original_name;
+      const img = `${imgPrefix}${e.poster_path}`;
+      return display("r-movielan", title, img, parent);
+    });
 
+    discover.forEach((e) => {
+      const parent = $(".discover");
+      const title = e.title;
+      const img = `${imgPrefix}${e.backdrop_path}`;
+      return display("r-moviepor", title, img, parent);
+    });
+  }
 
-        //if section is empty, render elements
-        // foreach create elem/ display()
-    }
-    render(){
-        console.log('hi')
-        const main = this.shadowRoot.querySelector('.main')
-        main.innerHTML = '<r-loader></r-loader>'
+  render() {
+    //if section is empty, render elements || render loading state for when data hasn't come
+    console.log("hi");
+    const main = this.shadowRoot.querySelector(".main");
+    //make loader attribute dynamic to set duration
+    main.innerHTML = "<r-loader></r-loader>";
 
-        window.addEventListener('load',()=>{
-            setTimeout(()=>{this.loader()}, 3000)
-            })
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        this.loader();
+      }, 3000);
+    });
 
-        if(document.readyState === 'complete'){
-            setTimeout(()=>{this.loader()}, 1000)
-        }
-
-        this.displayMovies();
-    }
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'})
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
+    if (document.readyState === "complete") {
+      setTimeout(() => {
+        this.loader();
+      }, 1000);
     }
 
-    connectedCallback(){
-        this.render();
-    }
+    this.displayMovies();
+  }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
 
+  connectedCallback() {
+    this.render();
+  }
 }
 
-window.customElements.define('r-home', home)
-export {home}
+window.customElements.define("r-home", home);
+export { home };

@@ -37,8 +37,8 @@ export const display = (elem, title, img, parent)=>{
 }
 
 
-
 // AddtoWatchlist ==> RenderWatchlist
+// push item to local storage/DB
 
 
 const template = document.createElement('template');
@@ -67,7 +67,6 @@ class app extends HTMLElement {
         const page = `<r-${view}></r-${view}>`
         const pageDiv = this.shadowRoot.querySelector('.page')
         pageDiv.innerHTML = page
-        // pageDiv.innerHTML = '<r-home></r-home>'
     }
 
     constructor(){

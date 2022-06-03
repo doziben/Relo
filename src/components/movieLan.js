@@ -39,7 +39,6 @@ template.innerHTML = /*HTML*/ `
     </style>
 
     <div class ="movieLan">
-        <r-save></r-save>
         <p></p>
         <img src="" alt="">
     </div>
@@ -47,13 +46,20 @@ template.innerHTML = /*HTML*/ `
 
 class movielan extends HTMLElement {
     render(){
+        // Fade title after 3secs, on mouse in (show title)
         const titleSlot = this.shadowRoot.querySelector('p')
         const imgSlot = this.shadowRoot.querySelector('img')
+        const movie = this.shadowRoot.querySelector('.movieLan')
+
         const title = this.getAttribute('title')
         const img = this.getAttribute('img')
+        let type = this.getAttribute('type')
 
         titleSlot.innerText = title
         imgSlot.src = img
+        type? type = type : type = "save"
+        const btntype = document.createElement(`r-${type}`)
+        movie.prepend(btntype) 
     }
     constructor(){
         super();

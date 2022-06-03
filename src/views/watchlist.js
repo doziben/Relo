@@ -3,7 +3,15 @@ import { header } from "../components/header.js";
 import { sidebar } from "../components/sideBar.js";
 
 //Import CTRL to handle data 
-import { display } from "../app.js";
+const display = (elem, title, img, btn, parent)=>{
+    const type = document.createElement(elem)
+    type.setAttribute('img', img)
+    type.setAttribute('title', title)
+    type.setAttribute('type', btn)
+    parent.appendChild(type)
+}
+
+
 
 const template = document.createElement('template');
 template.innerHTML = /*HTML*/ `
@@ -20,6 +28,13 @@ template.innerHTML = /*HTML*/ `
         flex-direction: column;
         align-items: center;
         text-align: center;
+    }
+
+    .watchlist {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-gap: 1rem;
+        margin-bottom: 6rem;
     }
     </style>
     
@@ -52,17 +67,22 @@ class watchlist extends HTMLElement {
             </div>
         `
     }
+    handleWatchlist(){
+        const saved = JSON.parse(localStorage.getItem('movies'))
+        const parent = this.shadowRoot.querySelector('.watchlist');
+        const getSaved = ()=> {saved.forEach((e)=>{
+            return display("r-movielan", e.title, e.img, "delete", parent)
+        })}
 
+        saved? getSaved() : null
+    }
     loader(){
         const elem = this.shadowRoot.querySelector('.main')
         this.shadowRoot.removeChild(elem)
     }
 
     render(){
-        //onrender, get data from localstorage
-        const main = this.shadowRoot.querySelector('.main')
 
-            
         window.addEventListener('load',()=>{
             setTimeout(()=>{this.loader()}, 3000)
             })
@@ -70,12 +90,9 @@ class watchlist extends HTMLElement {
         if(document.readyState === 'complete'){
             setTimeout(()=>{this.loader()}, 2000)
         }
-
+        this.handleWatchlist()
         const div = this.shadowRoot.querySelector('.watchlist');
-        // Render watchlist
-        if(div.innerText == ""){
-            return this.emptyState()
-        }
+        div.firstElementChild? null : this.emptyState()
     }
     constructor(){
         super();

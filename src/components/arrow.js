@@ -43,6 +43,7 @@ template.innerHTML = /*HTML*/ `
 `
 
 class arrow extends HTMLElement {
+    // Fade title after 3secs, on mouse in (show arrow)
     render(){
         const direction = this.getAttribute('direction');
         if(direction=="right"){
