@@ -1,19 +1,19 @@
 //Import components required
 import { header } from "../components/header.js";
 import { sidebar } from "../components/sideBar.js";
+import { movieSave } from "../components/movieSave.js";
+import { showNotifications } from "../app.js";
 
-//Import CTRL to handle data 
-const display = (elem, title, img, btn, parent)=>{
-    const type = document.createElement(elem)
-    type.setAttribute('img', img)
-    type.setAttribute('title', title)
-    type.setAttribute('type', btn)
-    parent.appendChild(type)
-}
+//Import CTRL to handle data
+export const display = (elem, title, img, btn, parent) => {
+  const type = document.createElement(elem);
+  type.setAttribute("img", img);
+  type.setAttribute("title", title);
+  type.setAttribute("type", btn);
+  parent.appendChild(type);
+};
 
-
-
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = /*HTML*/ `
     <style>
     @import url(../../public/CSS/index.css);
@@ -39,19 +39,17 @@ template.innerHTML = /*HTML*/ `
     </style>
     
     <h1> Watchlist </h1>
-
-    <div class = "main">
-        <r-loader></r-loader>
-    </div>
+    
+    
     <div class ="watchlist">
     </div>
-`
-
+`;
+//Set timeout for displaying notifications
 
 class watchlist extends HTMLElement {
-    emptyState(){
-        const div = this.shadowRoot.querySelector('.watchlist');
-        div.innerHTML = /*HTML*/`
+  emptyState() {
+    const div = this.shadowRoot.querySelector(".watchlist");
+    div.innerHTML = /*HTML*/ `
             <div class ="empty">
                 <svg width="163" height="163" viewBox="0 0 163 163" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="81.5" cy="81.5" r="81.5" fill="#161D2F"/>
@@ -65,44 +63,38 @@ class watchlist extends HTMLElement {
                 <h3>Nothing here yet</h3>
                 <p>You haven’t added any movies <br> to your watchlist yet</p>
             </div>
-        `
-    }
-    handleWatchlist(){
-        const saved = JSON.parse(localStorage.getItem('movies'))
-        const parent = this.shadowRoot.querySelector('.watchlist');
-        const getSaved = ()=> {saved.forEach((e)=>{
-            return display("r-movielan", e.title, e.img, "delete", parent)
-        })}
+        `;
+  }
+  handleWatchlist() {
+    const saved = JSON.parse(localStorage.getItem("movies"));
+    const parent = this.shadowRoot.querySelector(".watchlist");
+    const getSaved = () => {
+      saved.forEach((e) => {
+        return display("r-moviesave", e.title, e.img, "delete", parent);
+      });
+    };
 
-        saved? getSaved() : null
-    }
-    loader(){
-        const elem = this.shadowRoot.querySelector('.main')
-        this.shadowRoot.removeChild(elem)
-    }
+    saved ? getSaved() : null;
+  }
+  loader() {
+    const elem = this.shadowRoot.querySelector(".main");
+    this.shadowRoot.removeChild(elem);
+  }
 
-    render(){
-
-        window.addEventListener('load',()=>{
-            setTimeout(()=>{this.loader()}, 3000)
-            })
-
-        if(document.readyState === 'complete'){
-            setTimeout(()=>{this.loader()}, 2000)
-        }
-        this.handleWatchlist()
-        const div = this.shadowRoot.querySelector('.watchlist');
-        div.firstElementChild? null : this.emptyState()
-    }
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'})
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
-    }
-    connectedCallback(){
-        this.render()
-    }
+  render() {
+    this.handleWatchlist();
+    const div = this.shadowRoot.querySelector(".watchlist");
+    div.firstElementChild ? null : this.emptyState();
+  }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+  connectedCallback() {
+    this.render();
+  }
 }
 
-window.customElements.define('r-watchlist', watchlist)
-export {watchlist}
+window.customElements.define("r-watchlist", watchlist);
+export { watchlist };

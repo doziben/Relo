@@ -98,9 +98,6 @@ template.innerHTML = /*HTML*/ `
     <r-footer></r-footer>
 `;
 
-// Movie Div selected then renderView function is called to create movie elements in the divs
-// addtoWatchlist
-
 const imgPrefix = "https://image.tmdb.org/t/p/w500/";
 class home extends HTMLElement {
   loader() {
@@ -152,11 +149,13 @@ class home extends HTMLElement {
   }
 
   render() {
-    //if section is empty, render elements || render loading state for when data hasn't come
     console.log("hi");
-    const main = this.shadowRoot.querySelector(".main");
-    //make loader attribute dynamic to set duration
+    const $ = (elem) => {
+      return this.shadowRoot.querySelector(elem);
+    };
+    const main = $(".main");
     main.innerHTML = "<r-loader></r-loader>";
+    //make loader attribute dynamic to set duration
 
     window.addEventListener("load", () => {
       setTimeout(() => {

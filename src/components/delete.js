@@ -1,3 +1,5 @@
+import { showNotifications } from "../app.js";
+
 const template = document.createElement("template");
 template.innerHTML = /*HTML*/ `
     <style>
@@ -33,6 +35,19 @@ template.innerHTML = /*HTML*/ `
 `;
 
 export class rdelete extends HTMLElement {
+  post(movie) {
+    let main = this.ownerDocument.body.childNodes[2];
+    const app = main.children[0].shadowRoot.childNodes[3];
+    const page = app.children[2];
+
+    showNotifications("Removed", movie, page);
+  }
+  reRender() {
+    let main = this.ownerDocument.body.childNodes[2];
+    const app = main.children[0];
+
+    app.setAttribute("view", "watchlist");
+  }
   render() {
     const nodes = this.parentNode.children;
     const titleElem = nodes[1];
@@ -43,7 +58,6 @@ export class rdelete extends HTMLElement {
       img: imgElem.currentSrc,
     };
 
-    // append/ display notification
     this.addEventListener("click", () => {
       this.parentNode.style.display = "none";
       let storage = JSON.parse(localStorage.getItem("movies"));
@@ -52,6 +66,8 @@ export class rdelete extends HTMLElement {
       });
 
       localStorage.setItem("movies", JSON.stringify(newStorage));
+      this.reRender();
+      this.post(movie.title);
     });
   }
   constructor() {

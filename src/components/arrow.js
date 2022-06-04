@@ -1,4 +1,4 @@
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = /*HTML*/ `
     <style>
         .right{
@@ -40,30 +40,40 @@ template.innerHTML = /*HTML*/ `
         </defs>
         </svg>
     </div>
-`
+`;
 
 class arrow extends HTMLElement {
-    // Fade title after 3secs, on mouse in (show arrow)
-    render(){
-        const direction = this.getAttribute('direction');
-        if(direction=="right"){
-            this.shadowRoot.querySelector('svg').classList.add('right')
-        }
-
-        else if(direction=="left"){
-            this.shadowRoot.querySelector('svg').classList.add('left')
-        }
-        
+  // Fade title after 3secs, on mouse in (show arrow)
+  render() {
+    const direction = this.getAttribute("direction");
+    if (direction == "right") {
+      this.shadowRoot.querySelector("svg").classList.add("right");
+    } else if (direction == "left") {
+      this.shadowRoot.querySelector("svg").classList.add("left");
     }
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'})
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
-    }
-    connectedCallback(){
-        this.render()
-    }
+    this.addEventListener("click", () => {
+      const targetDiv = this.parentElement.nextElementSibling;
+      const movieDiv = [...targetDiv.children];
+      let maxMove = movieDiv[9].getBoundingClientRect().x;
+      let move = movieDiv[2].getBoundingClientRect().x;
+      //once we have gotten to the last elem == do nothing
+      move < maxMove / 2;
+      movieDiv.forEach((e) => {
+        e.style.transition = `all ease-in-out 1s`;
+        e.style.transform = `translateX(-${move}px)`;
+        console.log(e.getBoundingClientRect());
+      });
+    });
+  }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+  connectedCallback() {
+    this.render();
+  }
 }
 
-window.customElements.define('r-arrow', arrow)
-export {arrow}
+window.customElements.define("r-arrow", arrow);
+export { arrow };

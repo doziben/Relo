@@ -1,4 +1,4 @@
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = /*HTML*/ `
     <style>
     @import url(../../public/CSS/index.css);
@@ -15,9 +15,7 @@ template.innerHTML = /*HTML*/ `
     height: 100%;
     background-color: var(--dark-main-color);
     position: fixed;
-    animation-name: fade;
-    animation-duration: 3s;
-    animation-delay: 1s;
+    transition: all ease-in-out 0.1s;
     }
 
     ::-webkit-scrollbar {
@@ -57,19 +55,15 @@ template.innerHTML = /*HTML*/ `
         <div class="spinner"> </div>
     </div>
     
-`
+`;
 
 class loader extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'})
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
 }
 
-window.customElements.define('r-loader', loader)
-export {loader}
-
-
-
-
+window.customElements.define("r-loader", loader);
+export { loader };

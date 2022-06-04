@@ -1,3 +1,5 @@
+import { showNotifications } from "../app.js";
+
 const template = document.createElement("template");
 template.innerHTML = /*HTML*/ `
     <style>
@@ -34,10 +36,23 @@ template.innerHTML = /*HTML*/ `
 `;
 
 class save extends HTMLElement {
+  post(type, movie) {
+    let main = this.ownerDocument.body.childNodes[2];
+    const app = main.children[0].shadowRoot.childNodes[3];
+    const page = app.children[2];
+
+    showNotifications(type, movie, page);
+  }
+
   render() {
     const nodes = this.parentNode.children;
     const titleElem = nodes[1];
     const imgElem = nodes[2];
+
+    const movie = {
+      title: titleElem.innerText,
+      img: imgElem.currentSrc,
+    };
 
     const postItem = (movie) => {
       const storage = [];
@@ -50,16 +65,20 @@ class save extends HTMLElement {
         const movieExist = exist.find((e) => {
           return e.title == movie.title;
         });
-        movieExist ? console.log("already existing") : exist.push(movie);
+
+        const already = () => {
+          return this.post("Exists", titleElem.innerText);
+        };
+        const first = () => {
+          exist.push(movie);
+          this.post("Added", titleElem.innerText);
+        };
+        movieExist ? already() : first();
         localStorage.setItem("movies", JSON.stringify(exist));
       }
     };
 
     this.addEventListener("click", () => {
-      const movie = {
-        title: titleElem.innerText,
-        img: imgElem.currentSrc,
-      };
       postItem(movie);
     });
   }
