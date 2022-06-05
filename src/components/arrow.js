@@ -13,6 +13,7 @@ template.innerHTML = /*HTML*/ `
 
         .arrow{
             cursor: pointer;
+            transition: all ease-in-out 0.4s;
         }
 
         .hidden{
@@ -45,24 +46,38 @@ template.innerHTML = /*HTML*/ `
 class arrow extends HTMLElement {
   // Fade title after 3secs, on mouse in (show arrow)
   render() {
+    const sliderWrapper = this.parentElement.nextElementSibling;
+    let movieNodes = [...sliderWrapper.children];
+    let slider = movieNodes[0];
+
     const direction = this.getAttribute("direction");
     if (direction == "right") {
       this.shadowRoot.querySelector("svg").classList.add("right");
     } else if (direction == "left") {
       this.shadowRoot.querySelector("svg").classList.add("left");
     }
+
     this.addEventListener("click", () => {
-      const targetDiv = this.parentElement.nextElementSibling;
-      const movieDiv = [...targetDiv.children];
-      let maxMove = movieDiv[9].getBoundingClientRect().x;
-      let move = movieDiv[2].getBoundingClientRect().x;
-      //once we have gotten to the last elem == do nothing
-      move < maxMove / 2;
-      movieDiv.forEach((e) => {
-        e.style.transition = `all ease-in-out 1s`;
-        e.style.transform = `translateX(-${move}px)`;
-        console.log(e.getBoundingClientRect());
-      });
+      let divWidth = slider.scrollWidth;
+      let sliderWidth = sliderWrapper.getBoundingClientRect().width;
+      let moveAmount = divWidth - sliderWidth;
+      let move;
+      let right = direction == "right";
+
+      right ? (move = `-${moveAmount}px`) : (move = `0px`);
+      slider.style.transition = `all ease-in-out 1s`;
+      slider.style.transform = `translateX(${move})`;
+    });
+
+    const timing = () =>
+      setTimeout(() => {
+        this.style.visibility = "hidden";
+      }, 8000);
+
+    timing();
+    sliderWrapper.addEventListener("mouseover", () => {
+      this.style.visibility = "visible";
+      timing();
     });
   }
   constructor() {

@@ -20,13 +20,17 @@ template.innerHTML = /*HTML*/ `
         position: relative;
         display:flex;
         gap: 0.5rem;
-        overflow-x: scroll;
-        overflow-y: clip;
-        height: fit-content;
+        height: 100%;
     }
 
     ::-webkit-scrollbar{
         display:none;
+    }
+
+    .slider{
+      overflow-x: scroll;
+      overflow-y: hidden;
+      height:100%;
     }
 
     .b,.c,.d{
@@ -64,7 +68,9 @@ template.innerHTML = /*HTML*/ `
     </div>
     <section >
         <h1> Trending </h1>
-        <div class = "trending" >
+        <div class = "slider">
+          <div class = "trending" >
+          </div>
         </div>
     </section>
 
@@ -74,7 +80,9 @@ template.innerHTML = /*HTML*/ `
                 <r-arrow class="arrow" direction="left"></r-arrow>
                 <r-arrow class="arrow" direction="right"></r-arrow>
             </div>
-        <div class = "foryou">
+        <div class = "slider">
+          <div class = "foryou">
+          </div>
         </div>
     </section>
 
@@ -84,13 +92,17 @@ template.innerHTML = /*HTML*/ `
             <r-arrow class="arrow" direction="left"></r-arrow>
             <r-arrow class="arrow" direction="right"></r-arrow>
         </div>
-    <div class = "tvshows">
-    </div>
+      <div class = "slider">
+        <div class = "tvshows">
+        </div>
+      </div>
     </section>
 
     <section class="d">
     <h1> Discover </h1>
-    <div class = "discover">
+    <div class = "slider">
+      <div class = "discover">
+      </div>
     </div>
     </section>
 
