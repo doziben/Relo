@@ -1,4 +1,4 @@
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = /*HTML*/ `
     <style>
     @import url(../../public/CSS/index.css);
@@ -16,12 +16,8 @@ template.innerHTML = /*HTML*/ `
         height: inherit;
         object-fit: cover;
         border-radius: 12px;
-        opacity: 50%;
+        opacity: 100%;
         transition: all ease-in-out 0.1s;
-    }
-
-    img:hover {
-        opacity: 30%;
     }
 
     p {
@@ -35,6 +31,7 @@ template.innerHTML = /*HTML*/ `
         overflow: hidden;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+        visibility: hidden;
     }
     </style>
 
@@ -42,34 +39,43 @@ template.innerHTML = /*HTML*/ `
         <p></p>
         <img src="" alt="">
     </div>
-`
+`;
 
 class movielan extends HTMLElement {
-    render(){
-        // Fade title after 3secs, on mouse in (show title)
-        const titleSlot = this.shadowRoot.querySelector('p')
-        const imgSlot = this.shadowRoot.querySelector('img')
-        const movie = this.shadowRoot.querySelector('.movieLan')
+  render() {
+    // Fade title after 3secs, on mouse in (show title)
+    const titleSlot = this.shadowRoot.querySelector("p");
+    const imgSlot = this.shadowRoot.querySelector("img");
+    const movie = this.shadowRoot.querySelector(".movieLan");
 
-        const title = this.getAttribute('title')
-        const img = this.getAttribute('img')
-        let type = this.getAttribute('type')
+    const title = this.getAttribute("title");
+    const img = this.getAttribute("img");
+    let type = this.getAttribute("type");
 
-        titleSlot.innerText = title
-        imgSlot.src = img
-        type? type = type : type = "save"
-        const btntype = document.createElement(`r-${type}`)
-        movie.prepend(btntype) 
-    }
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'})
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
-    }
-    connectedCallback(){
-        this.render()
-    }
+    titleSlot.innerText = title;
+    imgSlot.src = img;
+    type ? (type = type) : (type = "save");
+    const btntype = document.createElement(`r-${type}`);
+    movie.prepend(btntype);
+
+    this.addEventListener("mouseover", () => {
+      titleSlot.style.visibility = "visible";
+      imgSlot.style.opacity = "30%";
+    });
+    this.addEventListener("mouseleave", () => {
+      titleSlot.style.visibility = "hidden";
+      imgSlot.style.opacity = "100%";
+    });
+  }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+  connectedCallback() {
+    this.render();
+  }
 }
 
-window.customElements.define('r-movielan', movielan)
-export {movielan}
+window.customElements.define("r-movielan", movielan);
+export { movielan };

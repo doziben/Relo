@@ -16,12 +16,8 @@ template.innerHTML = /*HTML*/ `
         height: inherit;
         object-fit: cover;
         border-radius: 12px;
-        opacity: 50%;
+        opacity: 100%;
         transition: all ease-in-out 0.1s;
-    }
-
-    img:hover {
-        opacity: 30%;
     }
 
     p {
@@ -35,6 +31,7 @@ template.innerHTML = /*HTML*/ `
         overflow: hidden;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+        visibility: hidden;
     }
     </style>
 
@@ -60,6 +57,15 @@ class movieSave extends HTMLElement {
     type ? (type = type) : (type = "save");
     const btntype = document.createElement(`r-${type}`);
     movie.prepend(btntype);
+
+    this.addEventListener("mouseover", () => {
+      titleSlot.style.visibility = "visible";
+      imgSlot.style.opacity = "30%";
+    });
+    this.addEventListener("mouseleave", () => {
+      titleSlot.style.visibility = "hidden";
+      imgSlot.style.opacity = "100%";
+    });
   }
   constructor() {
     super();
