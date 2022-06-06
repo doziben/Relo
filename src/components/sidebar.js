@@ -1,6 +1,6 @@
 import { router } from "../router.js";
 
-const template = document.createElement('template');
+const template = document.createElement("template");
 template.innerHTML = /*HTML*/ `
     <style>
         @import url(../../public/CSS/index.css);
@@ -75,32 +75,32 @@ template.innerHTML = /*HTML*/ `
     </svg></a>
 
     </div>
-`
+`;
 
 class sidebar extends HTMLElement {
-    constructor(){
-        super();
-        this.attachShadow({mode: 'open'})
-        this.shadowRoot.appendChild(template.content.cloneNode(true))
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
 
-    connectedCallback(){
-        const tabs = this.shadowRoot.querySelectorAll('a');
+  connectedCallback() {
+    const tabs = this.shadowRoot.querySelectorAll("a");
 
-        tabs.forEach((tab)=>{
-            tab.addEventListener('click', (e)=>{
-                e.preventDefault();
-                let paths = e.composedPath()[0]
-                let ref= paths.pathname.replace('/public/', "")
-                router(ref);
-                tabs.forEach((item)=>{
-                    item.lastChild.classList.remove('active');
-                })
-                tab.lastChild.classList.add('active');
-            })
-        })
-    }
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        e.preventDefault();
+        let paths = e.composedPath()[0];
+        let ref = paths.pathname.replace("/", "");
+        router(ref);
+        tabs.forEach((item) => {
+          item.lastChild.classList.remove("active");
+        });
+        tab.lastChild.classList.add("active");
+      });
+    });
+  }
 }
 
-window.customElements.define('r-sidebar', sidebar)
-export {sidebar}
+window.customElements.define("r-sidebar", sidebar);
+export { sidebar };

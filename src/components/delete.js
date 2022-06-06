@@ -54,7 +54,7 @@ export class rdelete extends HTMLElement {
     const imgElem = nodes[2];
 
     const movie = {
-      title: titleElem.innerText,
+      title: titleElem.innerHTML,
       img: imgElem.currentSrc,
     };
 
@@ -67,7 +67,7 @@ export class rdelete extends HTMLElement {
 
       localStorage.setItem("movies", JSON.stringify(newStorage));
       this.reRender();
-      this.post(movie.title);
+      this.post(titleElem.innerHTML);
     });
   }
   constructor() {

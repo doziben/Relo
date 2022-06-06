@@ -50,7 +50,7 @@ class save extends HTMLElement {
     const imgElem = nodes[2];
 
     const movie = {
-      title: titleElem.innerText,
+      title: titleElem.innerHTML,
       img: imgElem.currentSrc,
     };
 
@@ -67,11 +67,11 @@ class save extends HTMLElement {
         });
 
         const already = () => {
-          return this.post("Exists", titleElem.innerText);
+          return this.post("Exists", titleElem.innerHTML);
         };
         const first = () => {
           exist.push(movie);
-          this.post("Added", titleElem.innerText);
+          this.post("Added", titleElem.innerHTML);
         };
         movieExist ? already() : first();
         localStorage.setItem("movies", JSON.stringify(exist));
@@ -82,6 +82,7 @@ class save extends HTMLElement {
       postItem(movie);
     });
   }
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });

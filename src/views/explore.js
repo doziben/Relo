@@ -35,12 +35,6 @@ class explore extends HTMLElement {
     this.shadowRoot.removeChild(elem);
   }
   async render() {
-    // window.addEventListener("load", () => {
-    //     setTimeout(() => {
-    //       this.loader();
-    //     }, 3000);
-    //   });
-
     if (document.readyState === "complete") {
       setTimeout(() => {
         this.loader();
@@ -48,7 +42,6 @@ class explore extends HTMLElement {
     }
 
     const movies = await CTRLexplore();
-    console.log(movies);
     movies.forEach((e) => {
       const parent = this.shadowRoot.querySelector(".explore");
       const title = e.title;
